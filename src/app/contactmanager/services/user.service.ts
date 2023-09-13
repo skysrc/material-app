@@ -24,7 +24,7 @@ export class UserService {
 
   // this enable other component to subscribe to this behaviour subject.
   get users(): Observable<User[]> {
-    return this._users.asObservable();
+    return this._users.asObservable(); // init is the 1st time data received by subscribers.
   }
 
   loadAll() {
