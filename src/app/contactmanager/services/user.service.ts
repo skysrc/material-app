@@ -28,7 +28,7 @@ export class UserService {
   }
 
   loadAll() {
-    const userUrl = 'https://angular-material-api.azurewebsites.net/users';
+    const userUrl = 'https://localhost:7113/users';
 
     return this.http.get<User[]>(userUrl)
       .subscribe({
