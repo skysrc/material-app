@@ -27,6 +27,10 @@ export class UserService {
     return this._users.asObservable(); // init is the 1st time data received by subscribers.
   }
 
+  userById(id: number): User {
+    return this.dataStore.users.find(x => x.id == id)!;
+  }
+
   loadAll() {
     const userUrl = 'https://localhost:7113/users';
 
