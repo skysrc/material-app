@@ -1,4 +1,8 @@
 <div class="mat-elevation-z8">
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input />
+  </mat-form-field>
   <table mat-table [dataSource]="dataSource">
     <!-- Column def-->
     <ng-container matColumnDef="position">
@@ -20,6 +24,12 @@
     <!-- Row def-->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <!--Row shown when there's no matching data-->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        No data matching the filter "{{ input.value }}
+      </td>
+    </tr>
   </table>
   <mat-paginator
     [pageSize]="2"

@@ -2,6 +2,7 @@ import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/cor
 import { Note } from '../../models/note';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-notes',
@@ -22,5 +23,11 @@ export class NotesComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<Note>(this.notes);
   }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
 
 }
