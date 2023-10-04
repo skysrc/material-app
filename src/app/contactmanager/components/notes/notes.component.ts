@@ -3,6 +3,7 @@ import { Note } from '../../models/note';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { filter } from 'rxjs';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-notes',
@@ -12,6 +13,7 @@ import { filter } from 'rxjs';
 export class NotesComponent implements OnInit, AfterViewInit {
   @Input() notes!: Note[];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   displayedColumns: string[] = ["position", "title", "date"];
   dataSource!: MatTableDataSource<Note>;
@@ -19,6 +21,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
   constructor() { }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<Note>(this.notes);
