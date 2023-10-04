@@ -15,7 +15,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  displayedColumns: string[] = ["position", "title", "date"];
+  displayedColumns: string[] = ["id", "title", "date"];
   dataSource!: MatTableDataSource<Note>;
 
   constructor() { }
