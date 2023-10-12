@@ -30,7 +30,6 @@ export class ToolbarComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('This dialog was closed', result);
     });
-
   }
 
 }
