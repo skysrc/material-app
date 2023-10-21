@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { User } from '../../models/user';
 import { FormControl, Validators } from '@angular/forms';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-new-contact-dialog',
@@ -16,7 +17,8 @@ export class NewContactDialogComponent {
 
   user!: User;
   // we need to resolve MatDialogRef so that we can close the diaglog from here.
-  constructor(private dialogRef: MatDialogRef<NewContactDialogComponent>) {
+  constructor(private dialogRef: MatDialogRef<NewContactDialogComponent>,
+    private userService: UserService) {
   }
 
   name = new FormControl('', [Validators.required]);
@@ -31,7 +33,10 @@ export class NewContactDialogComponent {
 
   save(): void {
     this.user.name = this.name.value as string;
-    this.dialogRef.close(this.user)
+    this.userService.addUser(this.user).then(usr => {
+      this.dialogRef.close(usr);
+    });
+
   }
 
 
