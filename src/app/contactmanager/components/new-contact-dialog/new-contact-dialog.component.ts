@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { User } from '../../models/user';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-contact-dialog',
@@ -16,7 +17,12 @@ export class NewContactDialogComponent {
   user!: User;
   // we need to resolve MatDialogRef so that we can close the diaglog from here.
   constructor(private dialogRef: MatDialogRef<NewContactDialogComponent>) {
+  }
 
+  name = new FormControl('', [Validators.required]);
+
+  getErrorMessage() {
+    return this.name.hasError('required') ? 'You must enter a value' : '';
   }
 
   ngOnInit(): void {
@@ -24,6 +30,7 @@ export class NewContactDialogComponent {
   }
 
   save(): void {
+    this.user.name = this.name.value as string;
     this.dialogRef.close(this.user)
   }
 

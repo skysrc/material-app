@@ -9,7 +9,7 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 
 import { MaterialModule } from '../shared/material.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -45,6 +45,7 @@ const routes: Routes = [
     MaterialModule,
     FlexLayoutModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
   providers: [
