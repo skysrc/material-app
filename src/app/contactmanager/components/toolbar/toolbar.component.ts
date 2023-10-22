@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NewContactDialogComponent } from '../new-contact-dialog/new-contact-dialog.component';
+import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-toolbar',
@@ -14,7 +16,10 @@ export class ToolbarComponent implements OnInit {
   /**
    *
    */
-  constructor(private diaglog: MatDialog) {
+  constructor(
+    private diaglog: MatDialog,
+    private snackBar: MatSnackBar,
+    private router: Router) {
 
   }
   ngOnInit() {
@@ -29,7 +34,20 @@ export class ToolbarComponent implements OnInit {
     // subscribe to dialog closed event
     dialogRef.afterClosed().subscribe(result => {
       console.log('This dialog was closed', result);
+
+      if (result) {
+        this.openSnackBar("Contact added", "Navigate")
+          .onAction().subscribe(() => {
+            //navigate
+            this.router.navigate(['/contactmanager', result.id]);
+          });
+      }
     });
   }
 
+  openSnackBar(message: string, action: string): MatSnackBarRef<SimpleSnackBar> {
+    return this.snackBar.open(message, action, {
+      duration: 5000,
+    });
+  }
 }
