@@ -1,6 +1,7 @@
 <mat-sidenav-container
   class="app-sidenav-container"
   [class.dark-theme]="isDarkTheme"
+  [dir]="dir"
 >
   <mat-sidenav
     #sidenav
@@ -25,6 +26,7 @@
     <app-toolbar
       (toggleTheme)="toggleTheme()"
       (toggleSidenav)="sidenav.toggle()"
+      (toggleDir)="toggleDir()"
     >
     </app-toolbar>
     <div class="wrapper">
